@@ -1,10 +1,9 @@
 import { createElement } from "./tools/jsxFactory";
-
 export class CategoryList {
   props: {
-    categories: string[],
-    selectedCategory: string,
-    callback: (selected: string) => void
+    categories: string[];
+    selectedCategory: string;
+    callback: (selected: string) => void;
   };
 
   getContent(): HTMLElement {
@@ -25,7 +24,6 @@ export class CategoryList {
     let btnClass = selected === cat ? "btn-primary" : "btn-secondary";
     return (
       <button
-        type="button"
         className={`btn btn-block ${btnClass}`}
         onclick={() => this.props.callback(cat)}
       >

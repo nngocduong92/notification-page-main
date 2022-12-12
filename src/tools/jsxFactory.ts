@@ -24,7 +24,7 @@ export function createElement(
 
 declare global {
   namespace JSX {
-    interface ELementAttributeProperty {
+    interface ElementAttributesProperty {
       props;
     }
   }

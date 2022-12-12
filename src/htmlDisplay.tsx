@@ -4,7 +4,6 @@ import { ProductList } from "./productList";
 import { createElement } from "./tools/jsxFactory";
 
 export class HtmlDisplay {
-
   private containerElem: HTMLElement;
   private selectedCategory: string;
 
@@ -12,9 +11,8 @@ export class HtmlDisplay {
     this.containerElem = document.createElement("div");
   }
 
-
   props: {
-    dataSource: AbstractDataSource
+    dataSource: AbstractDataSource;
   };
 
   async getContent(): Promise<HTMLElement> {
@@ -24,26 +22,34 @@ export class HtmlDisplay {
     // return <h3>{this.getElementText()}</h3>;
   }
 
-
   async updateContent() {
-    let products = await this.props.dataSource.getProducts("id", this.selectedCategory);
+    let products = await this.props.dataSource.getProducts(
+      "id",
+      this.selectedCategory
+    );
     let categories = await this.props.dataSource.getCategories();
     this.containerElem.innerHTML = "";
-    let content = <div>
-      <ProductList products={products} categories={categories} selectedCategory={this.selectedCategory} addToOrderCallback={this.addToOrder} filterCallback={this.selectedCategory} />
-      
-    </div>;
+    let content = (
+      <div>
+        <ProductList
+          products={products}
+          categories={categories}
+          selectedCategory={this.selectedCategory}
+          addToOrderCallback={this.addToOrder}
+          filterCallback={this.selectCategory}
+        />
+      </div>
+    );
     this.containerElem.appendChild(content);
   }
 
   addToOrder = (product: Product, quantity: number) => {
     this.props.dataSource.order.addProduct(product, quantity);
     this.updateContent();
-  }
+  };
 
-  selectCategory = (selected:string) => {
+  selectCategory = (selected: string) => {
     this.selectedCategory = selected === "All" ? undefined : selected;
     this.updateContent();
-  }
-
+  };
 }

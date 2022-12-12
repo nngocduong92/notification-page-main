@@ -11,28 +11,41 @@ export class ProductItem {
 
   getContent(): HTMLElement {
     return (
-      <div>
+      <div className="card m-1 p-1 bg-light">
         <h4>
           {this.props.product.name}
-          <span>${this.props.product.price.toFixed(2)}</span>
+          <span className="badge badge-pill badge-primary float-right">
+            ${this.props.product.price.toFixed(2)}
+          </span>
         </h4>
-        <div>{this.props.product.description}</div>
-        <button type="button" onclick={this.handleAddToCart}>Add To Card</button>
-        <select title="quantity" onchange={this.handleQuantityChange}>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-        </select>
+        <div className="card-text bg-white p-1">
+          {this.props.product.description}
+          <button
+            type="button"
+            onclick={this.handleAddToCart}
+            className="btn btn-success btn-sm float-right"
+          >
+            Add To Card
+          </button>
+          <select
+            title="quantity"
+            onchange={this.handleQuantityChange}
+            className="form-control-inline float-right m-1"
+          >
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+          </select>
+        </div>
       </div>
     );
   }
 
   handleQuantityChange = (ev: Event): void => {
     this.quantity = Number((ev.target as HTMLSelectElement).value);
-  }
+  };
 
   handleAddToCart = (): void => {
     this.props.callback(this.props.product, this.quantity);
-  }
-
+  };
 }
