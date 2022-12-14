@@ -1,3 +1,4 @@
+import { minimumValue } from "../decorators";
 import { Product, Order } from "./entities";
 
 export type ProductProp = keyof Product;
@@ -16,6 +17,7 @@ export abstract class AbstractDataSource {
     this.loading = this.getData();
   }
 
+  @minimumValue("price", 30)
   async getProducts(
     sortProp: ProductProp = "id",
     category?: string
