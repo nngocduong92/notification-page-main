@@ -1,0 +1,10 @@
+{
+    "name": "shopping-cart",
+    "description": "Stand-Alone Web App",
+    "respository": "https://github.com/nngocduong92/shopping-cart",
+    "license": "0BSD",
+    "devDependencies": {
+        "express": "4.17.1",
+        "json-server": "0.16.3"
+    }
+}
